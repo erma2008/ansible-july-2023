@@ -1,0 +1,27 @@
+- hosts: all
+  tasks:
+#yum install httpd -y 
+  - name: install packages
+    yum:
+      name: 
+        - httpd
+        - wget
+        - tree
+        - vim
+      state: latest
+#systemctl start httpd 
+  - name: Start service httpd, if not started
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: Stop service httpd
+    service:
+      name: httpd
+      state: stopped
+  
+  # - name: remove the Apache package
+  #   yum:
+  #     name: httpd
+  #     state: absent
