@@ -1,0 +1,16 @@
+- debug:
+    msg: "Rocky machine"
+#Installing apache service
+- name: Install Apache
+  dnf:
+    name: httpd
+    state: present
+
+#starting apache service
+- name: Start Apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+

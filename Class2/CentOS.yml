@@ -1,0 +1,16 @@
+- debug:
+    msg: "CentOS machine"
+#Installing apache service
+- name: Install Apache
+  yum:
+    name: httpd
+    state: present
+
+#starting apache service
+- name: Start Apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+

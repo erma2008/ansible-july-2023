@@ -1,0 +1,28 @@
+- hosts: all
+  tasks:
+  # - name: remove the Apache package
+  #   yum:
+  #     name: httpd
+  #     state: absent
+#yum install httpd -y 
+  - name: install htppd
+    yum:
+      name: httpd
+      state: present
+    notify: Restart httpd
+  - name: install vim
+    yum:
+      name: vim
+      state: present
+    notify: Install tree # this will call handler with name Install tree(name must match)
+
+
+  handlers:     #use it only when you need, you can as many handlers as you want
+  - name: Restart httpd
+    service:
+      name: httpd
+      state: restarted
+  - name: Install tree
+    yum:
+      name: tree
+      state: present

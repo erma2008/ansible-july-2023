@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+  - name: Intall Packages
+    yum:
+      name: "{{ package }}"
+      state: present
+    vars:
+      package:
+        - httpd
+        - vim
+        - tree
+        - unzip
