@@ -1,8 +1,8 @@
-- name: Enable PHP
+- name: Enable php 74
   shell: yum-config-manager --enable remi-php74
   when: php_version == 74
 
-- name: Enable PHP
+- name: Enable php 73
   shell: yum-config-manager --enable remi-php73
   when: php_version == 73
 
@@ -12,5 +12,7 @@
 
 - name: Insatll php
   yum:
-   name:
-   - php
+    name:
+      - php
+      - php-mysql
+    state: present
