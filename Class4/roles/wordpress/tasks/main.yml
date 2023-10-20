@@ -1,0 +1,30 @@
+- name: Download wordpress
+  get_url:
+    url: "{{ wordpress_url }}"
+    dest: "{{ wordpress_dest }}"
+- name: Extract wordpress
+  unarchive:
+    src: "{{ wordpress_dest }}"
+    dest: /tmp
+    remote_src: yes
+
+- name: Copy file with owner and permissions
+  copy:
+    src: /tmp/wordpress/.
+    dest: /var/www/html
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: '755'
+    remote_src: yes
+
+- name: Template a file to /etc/files.conf
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wordpress-config.php
+  
+- name: Start an enable Apache
+  service:
+    name: httpd
+    state: restarted
+
+  #create variables for url, destination,source(under extra wordpress task), owner and group
