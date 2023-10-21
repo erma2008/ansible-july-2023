@@ -1,0 +1,32 @@
+#dynamic values to change all vms host names in one task
+- hosts: all
+  become: true
+  tasks:
+  - hostname:
+      name: "{{ inventory_hostname }}"
+          #getting linux distribution on vm2
+  - debug:
+     msg: "{{ ansible_distribution }}"
+
+  - name: Install Apache
+    include_tasks: "{{ ansible_distribution }}.yml"
+
+      
+
+# 1. way to change hostnames, editing each vm hostname one by one
+# - hosts: vm2
+#   tasks:
+#   - hostname:
+#       name: hello
+
+# - hosts: aws1
+#   become: true
+#   tasks:
+#   - hostname:
+#       name: aws1
+
+# - hosts: aws2
+#   become: true
+#   tasks:
+#   - hostname:
+#       name: aws2
